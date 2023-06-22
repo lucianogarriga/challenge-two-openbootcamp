@@ -1,46 +1,30 @@
-
 import React, { useState, useEffect } from "react";
 
-// HOOK - COMPONENTE FUNCION
-
 const Clock = () => {
-  // useState - Se reemplaza el constructor y el estado inicial del componente
-  // uso de setFecha y setEdad para actualizar ambas variables iniciales
-
+  // Estado privado del componente
   const [fecha, setFecha] = useState(new Date());
   const [edad, setEdad] = useState(0);
-  const nombre = 'Martin';
-  const apellidos = 'San Jose' 
- 
+  const nombre = "Martin";
+  const apellidos = "San José";
 
   useEffect(() => {
-
-    // componentDidMount()
-    console.log("Componente creado");
-
-    // en el setInterval, llamamos a la función tick cada 1 segundo
-    // la funcion tick se pasa como callback a setInterval
-    // luego al ID del temporizador lo guardamos en la var timerID
-    const timerID = setInterval(() => tick(), 1000);
+    const timerID = setInterval(() => {
+      tick();
+    }, 1000);
 
     return () => {
-      // componentWillUnmount
-      console.log("Limpieza del temporizador al desmontar el componente"); 
       clearInterval(timerID);
     };
   }, []);
 
   const tick = () => {
-    setFecha(new Date())
-    setEdad(edad + 1)
-  }
+    setEdad(edad + 1);
+    setFecha(new Date());
+  };
 
   return (
     <div>
-      <h2>
-        Hora Actual:
-        {fecha.toLocaleTimeString()}
-      </h2>
+      <h2>Hora Actual: {fecha.toLocaleTimeString()}</h2>
       <h3>
         {nombre} {apellidos}
       </h3>
@@ -48,4 +32,5 @@ const Clock = () => {
     </div>
   );
 };
+
 export default Clock;
